@@ -15,11 +15,11 @@ export default function UserSettingsPage() {
 
   useEffect(() => {
     const auth = getAuthInfoFromBrowserCookie();
-    if (!auth || !auth.username) {
-      // 如果用户未登录，重定向到登录页面
-      router.push('/login');
-      return;
-    }
+    // if (!auth || !auth.username) {
+    //   // 如果用户未登录，重定向到登录页面
+    //   router.push('/login');
+    //   return;
+    // }
     setAuthInfo({ userName: auth.username });
     setIsLoading(false);
   }, [router]);
