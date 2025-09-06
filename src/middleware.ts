@@ -20,6 +20,11 @@ export async function middleware(request: NextRequest) {
   //   return NextResponse.redirect(warningUrl);
   // }
 
+  // 如果没有设置密码，直接放行
+  if (storageType === 'localstorage' && !process.env.PASSWORD) {
+    return NextResponse.next();
+  }
+
   // 从cookie获取认证信息
   const authInfo = getAuthInfoFromCookie(request);
 
@@ -133,6 +138,6 @@ function shouldSkipAuth(pathname: string): boolean {
 // 配置middleware匹配规则
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|login|warning|api/login|api/register|api/logout|api/cron|api/server-config|api/search|api/detail|api/image-proxy|api/tvbox).*)',
+    '/((?!_next/static|_next/image|favicon.ico|login|api/login|api/register|api/logout|api/cron|api/server-config|api/search|api/detail|api/image-proxy|api/tvbox).*)',
   ],
 };
